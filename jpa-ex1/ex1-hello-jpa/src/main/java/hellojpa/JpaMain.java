@@ -1,5 +1,6 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
 import org.hibernate.internal.build.AllowSysOut;
 
 import javax.persistence.EntityManager;
@@ -21,22 +22,24 @@ public class JpaMain {
         tx.begin();
 
         try{
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
 
             Member member1 = new Member();
-            member1.setUsername("hello1");
+            member1.setUsername("member1");
+            member1.setTeam(team);
             em.persist(member1);
-
-            Member member2 = new Member();
-            member2.setUsername("hello2");
-            em.persist(member2);
 
             em.flush();
             em.clear();
 
-            Member m1 = em.find(Member.class, member1.getId());
-            Member m2 = em.getReference(Member.class, member2.getId());
+//            Member m = em.find(Member.class, member1.getId());
 
-            logic(m1, m2);
+           List<Member> members = em.createQuery("select m from Member m", Member.class)
+                           .getResultList();
+
+
 
             tx.commit();
         }catch(Exception e){
