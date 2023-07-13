@@ -1,5 +1,6 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
 import org.hibernate.internal.build.AllowSysOut;
 
 import javax.persistence.EntityManager;
