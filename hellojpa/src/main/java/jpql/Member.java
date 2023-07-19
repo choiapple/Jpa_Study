@@ -1,4 +1,6 @@
-package jpql;
+package hellojpa.src.main.java.jpql;
+
+import hellojpa.src.main.java.jpql.Team;
 
 import javax.persistence.*;
 
@@ -12,7 +14,7 @@ public class Member {
     private int age;
 
     @ManyToOne
-    @JoinColumn("team_id")
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
 
     public long getId() {

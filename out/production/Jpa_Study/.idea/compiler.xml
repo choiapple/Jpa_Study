@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="ex1-hello-jpa" />
         <module name="jpashop" />
+        <module name="hellojpa" />
       </profile>
     </annotationProcessing>
   </component>
