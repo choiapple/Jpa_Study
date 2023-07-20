@@ -1,6 +1,7 @@
 package jpql;
 
 import hellojpa.src.main.java.jpql.Member;
+import hellojpa.src.main.java.jpql.Team;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,8 +23,15 @@ public class JpaMain {
             member.setAge(10);
             em.persist(member);
 
-            TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class);
-            Query query2 = em.createQuery("select m.username, m.age from Member m", String.class);
+            em.flush();
+            em.clear();
+
+//            List<Member> result = em.createQuery("select m from Member m", Member.class)
+//                            .getResultList();
+//            Member findMember = result.get(0);
+//            findMember.setAge(20);
+            List<Team> result = em.createQuery("select m.team from Member m", Team.class)
+                    .getResultList();
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
