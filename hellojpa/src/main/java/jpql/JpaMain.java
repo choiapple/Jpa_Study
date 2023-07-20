@@ -1,9 +1,8 @@
-package hellojpa.src.main.java.jpql;
+package jpql;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import hellojpa.src.main.java.jpql.Member;
+
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -20,8 +19,11 @@ public class JpaMain {
         try {
             Member member = new Member();
             member.setUsername("member1");
+            member.setAge(10);
             em.persist(member);
 
+            TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class);
+            Query query2 = em.createQuery("select m.username, m.age from Member m", String.class);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
