@@ -1,6 +1,7 @@
 package hellojpa.src.main.java.jpql;
 
 import hellojpa.src.main.java.jpql.Team;
+import jpql.MemberType;
 
 import javax.persistence.*;
 
@@ -16,6 +17,9 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
 
     public void changeTeam(Team team){
         this.team = team;
@@ -52,6 +56,14 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public MemberType getType() {
+        return type;
+    }
+
+    public void setType(MemberType type) {
+        this.type = type;
     }
 
     @Override
