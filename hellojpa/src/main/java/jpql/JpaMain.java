@@ -46,11 +46,13 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query  = "select m from Member m where m = :member";
-            Member findMember = em.createQuery(query, Member.class)
-                            .setParameter("member",member1)
-                            .getSingleResult();
-            System.out.println("findMember = " + findMember);
+            // FLUSH 자동 호출
+           int resultCount = em.createQuery("update Member m set m.age = 20")
+                           .executeUpdate();
+           em.clear();
+           Member findMember = em.find(Member.class, member1.getId());
+            System.out.println("findMEmber = " + findMember);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
